@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PraktikaShop.CatalogWindow"
+		x:CompileBindings="False"
+        Title="Каталог товаров">
+
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+			<TextBox Width="150" Watermark="Поиск" Margin="5"/>
+			<ComboBox Width="150" Margin="5" x:Name="OrderBox"/>
+			<ComboBox Width="150" Margin="5" x:Name="CostBox"/>
+		</StackPanel>
+
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+			<Button Content="Выйти" Margin="5"/>
+			<Button Content="Добавить в корзину" Margin="5"/>
+		</StackPanel>
+
+		<ScrollViewer>
+			<ListBox x:Name="CatalogListBox">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Border Margin="10" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="10">
+							<StackPanel Width="250" Spacing="5">
+								<Image Width="80" Height="80" Margin="5"/>
+								<TextBlock Text="{Binding ProductName, StringFormat='Название товара: {0}'}" FontWeight="Bold"/>
+								<TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0} руб.'}"/>
+								<TextBlock Text="{Binding Count, StringFormat='Осталось товара: {0} шт.'}"/>
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+	</DockPanel>
+</Window>

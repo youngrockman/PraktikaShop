@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PraktikaShop.MainWindow"
+        Title="Экран авторизации">
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+			<TextBlock Text="Добро пожаловать в магазин MarkLox "/>
+		</StackPanel>
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Content="Выйти" Margin="5" Click="ExitClick"/>
+			<Button Content="Регистрация" Margin="5" Click="RegistrationButton"/>
+			<Button Content="Войти" Margin="5" Click="LoginClick"/>
+		</StackPanel>
+		<StackPanel Margin="5" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<TextBlock Text="Логин" Margin="5"/>
+			<TextBox Width="150" Margin="5" x:Name="LoginBox"/>
+			<TextBlock Text="Пароль" Margin="5"/>
+			<TextBox Width="150" Margin="5" x:Name="PasswordBox"/>
+		</StackPanel>
+	</DockPanel>
+</Window>

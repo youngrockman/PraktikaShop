@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PraktikaShop.RegistrationWindow"
+        Title="Окно регистрации">
+
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+			<TextBlock Text="Введите cвои данные"/>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" DockPanel.Dock="Bottom">
+			<Button Content="Назад" Margin="5" Click="BackButton"/>
+			<Button Content="Зарегестрироваться" Click="RegistrationButton" Margin="5" />
+		</StackPanel>
+
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<TextBlock Text="ФИО" Margin="5"/>
+			<TextBox Margin="5" Width="150" x:Name="NameBox"/>
+			<TextBlock Text="Паспорт" Margin="5"/>
+			<TextBox Margin="5" Width="150" x:Name="PassportBox"/>
+			<TextBlock Text="Номер телефона" Margin="5"/>
+			<TextBox Margin="5" Width="150" x:Name="PhoneBox"/>
+			<TextBlock Text="Дата рождения" Margin="5"/>
+			<DatePicker Margin="5" Width="250" x:Name="BirthdayBox"/>
+			<TextBlock Text="Логин" Margin="5"/>
+			<TextBox Margin="5" Width="150" x:Name="LoginBox"/>
+			<TextBlock Text="Пароль" Margin="5"/>
+			<TextBox Margin="5" Width="150" x:Name="PasswordBox"/>
+		</StackPanel>
+
+	</DockPanel>
+
+</Window>
