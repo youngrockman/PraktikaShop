@@ -148,3 +148,4 @@ C:\Users\demo\source\repos\PraktikaShop\PraktikaShop\obj\Debug\net8.0\refint\Pra
 C:\Users\demo\source\repos\PraktikaShop\PraktikaShop\obj\Debug\net8.0\PraktikaShop.pdb
 C:\Users\demo\source\repos\PraktikaShop\PraktikaShop\obj\Debug\net8.0\PraktikaShop.genruntimeconfig.cache
 C:\Users\demo\source\repos\PraktikaShop\PraktikaShop\obj\Debug\net8.0\ref\PraktikaShop.dll
+C:\Users\demo\source\repos\PraktikaShop\PraktikaShop\obj\Debug\net8.0\PraktikaShop.sourcelink.json
