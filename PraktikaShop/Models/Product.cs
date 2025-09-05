@@ -29,7 +29,7 @@ public partial class Product
     {
         get
         {
-            return new Bitmap(AppDomain.CurrentDomain.BaseDirectory + "/" + Image);
+            return new Bitmap(Image);
         }
     }
 

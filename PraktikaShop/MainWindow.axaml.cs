@@ -37,7 +37,7 @@ namespace PraktikaShop
 
             else
             {
-                var message = MessageBoxManager.GetMessageBoxStandard("Уведомление", "Неправильный пароль", MsBox.Avalonia.Enums.ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+                var message = MessageBoxManager.GetMessageBoxStandard("Alarm", "Wrong Login or Password", MsBox.Avalonia.Enums.ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
 
                 await message.ShowAsync();
             }

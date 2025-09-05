@@ -17,6 +17,12 @@ public partial class CatalogWindow : Window
     {
         InitializeComponent();
         LoadProducts();
+        OrderBox.SelectionChanged += OrderBox_SelectionChanged;
+    }
+
+    private void OrderBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        LoadProducts();
     }
 
     private async void LoadProducts()
@@ -24,8 +30,20 @@ public partial class CatalogWindow : Window
         using var context = new KarpovContext();
         var allProducts = await context.Products.ToListAsync();
 
-        //сделать сортировки через свитч + if 
+ 
 
+        switch (OrderBox.SelectedIndex)
+        {
+            case 0:
+                allProducts = allProducts.OrderByDescending(x=>x.Count).ToList();
+                break;
+            case 1:
+                allProducts = allProducts.OrderBy(x=>x.Count).ToList();
+                break;
+        }
+
+        
+        
 
 
         CatalogListBox.ItemsSource = allProducts;

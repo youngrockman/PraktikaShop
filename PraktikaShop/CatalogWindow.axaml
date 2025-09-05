@@ -9,9 +9,12 @@
 
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-			<TextBox Width="150" Watermark="Поиск" Margin="5"/>
-			<ComboBox Width="150" Margin="5" x:Name="OrderBox"/>
-			<ComboBox Width="150" Margin="5" x:Name="CostBox"/>
+			<TextBox Width="150" Watermark="Поиск" Margin="5" x:Name="SeacrhBox"/>
+			<ComboBox Width="150" Margin="5" x:Name="OrderBox">
+				<ComboBoxItem>По возростанию</ComboBoxItem>
+				<ComboBoxItem>По убыванию</ComboBoxItem>
+			</ComboBox>
+			<ComboBox Width="150" Margin="5" x:Name="DiscountBox"/>
 		</StackPanel>
 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
