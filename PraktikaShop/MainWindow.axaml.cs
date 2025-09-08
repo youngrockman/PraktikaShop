@@ -2,9 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using MsBox.Avalonia;
 using PraktikaShop;
-using PraktikaShop.Models;
 using System.Linq;
-
+using PraktikaShop.Models;
 namespace PraktikaShop
 {
     public partial class MainWindow : Window

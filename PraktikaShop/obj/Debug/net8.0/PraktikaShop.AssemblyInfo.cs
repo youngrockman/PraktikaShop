@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PraktikaShop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+862f24c5bd98583d7d872d0e175d3d2f85a11f62")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b95dd45661936ef8b6318130a26f242caf0a49d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PraktikaShop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PraktikaShop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

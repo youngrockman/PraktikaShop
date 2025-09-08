@@ -14,24 +14,19 @@ public partial class Product
 
     public int? Cost { get; set; }
 
-    public int Discount
-    {
-        get
-        {
-            int a = 1 + 1;
-            return a;
-        }
-    }
-
     public string? Image { get; set; }
 
-    public Bitmap? ParseImage
+    public Bitmap ParseImage
     {
         get
         {
-            return new Bitmap(Image);
+            return new Bitmap(this.Image);
         }
     }
 
+    public virtual ICollection<BasketProduct> BasketProducts { get; set; } = new List<BasketProduct>();
+
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+
+    public virtual ICollection<UserComment> UserComments { get; set; } = new List<UserComment>();
 }

@@ -5,13 +5,15 @@ namespace PraktikaShop.Models;
 
 public partial class UserComment
 {
-    public int Commentid { get; set; }
+    public int UserCommentId { get; set; }
 
-    public int? Userid { get; set; }
+    public int UserId { get; set; }
 
-    public int? Productid { get; set; }
+    public int ProductId { get; set; }
 
-    public virtual Product? Product { get; set; }
+    public string? Comment { get; set; }
 
-    public virtual User? User { get; set; }
+    public virtual Product Product { get; set; } = null!;
+
+    public virtual User User { get; set; } = null!;
 }

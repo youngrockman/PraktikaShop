@@ -18,12 +18,10 @@
 		</StackPanel>
 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-			<Button Content="Выйти" Margin="5"/>
-			<Button Content="Добавить в корзину" Margin="5"/>
+			<Button Content="Выйти" Margin="5" Click="Exit_Click"/>
 		</StackPanel>
-
-		<ScrollViewer>
-			<ListBox x:Name="CatalogListBox">
+		
+			<ListBox x:Name="CatalogListBox" Height="200" >
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Border Margin="10" BorderThickness="1" BorderBrush="Gray" CornerRadius="5" Padding="10">
@@ -39,12 +37,13 @@
                                                Margin="0,5,0,0"/>
 									<TextBlock Text="{Binding Count, StringFormat='Осталось товара: {0} шт.'}"
                                                Margin="0,5,0,0"/>
+									<Button Margin="5" Tag="{Binding ProductId}" Content="Добавить в корзину"></Button>
+									<Button Margin="5" Tag="{Binding ProductId}" Content="Удалить" Click="DeleteProduct_Click"/>
 								</StackPanel>
 							</DockPanel>
 						</Border>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
-		</ScrollViewer>
 	</DockPanel>
 </Window>

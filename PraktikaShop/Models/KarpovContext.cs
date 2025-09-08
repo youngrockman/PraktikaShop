@@ -55,23 +55,22 @@ public partial class KarpovContext : DbContext
 
         modelBuilder.Entity<BasketProduct>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("basket_product");
+            entity.HasKey(e => e.BasketProductId).HasName("basket_product_pkey");
 
-            entity.Property(e => e.BasketId).HasColumnName("basket_id");
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+            entity.ToTable("basket_product");
+
+            entity.Property(e => e.BasketProductId)
                 .UseIdentityAlwaysColumn()
-                .HasColumnName("id");
+                .HasColumnName("basket_product_id");
+            entity.Property(e => e.BasketId).HasColumnName("basket_id");
             entity.Property(e => e.ProductCount).HasColumnName("product_count");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
 
-            entity.HasOne(d => d.Basket).WithMany()
+            entity.HasOne(d => d.Basket).WithMany(p => p.BasketProducts)
                 .HasForeignKey(d => d.BasketId)
                 .HasConstraintName("basketproduct_basketid_fkey");
 
-            entity.HasOne(d => d.Product).WithMany()
+            entity.HasOne(d => d.Product).WithMany(p => p.BasketProducts)
                 .HasForeignKey(d => d.ProductId)
                 .HasConstraintName("basketproduct_productid_fkey");
         });
@@ -94,13 +93,13 @@ public partial class KarpovContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("order_product_pkey");
+            entity.HasKey(e => e.OrderProductId).HasName("order_product_pkey");
 
             entity.ToTable("order_product");
 
-            entity.Property(e => e.Id)
+            entity.Property(e => e.OrderProductId)
                 .UseIdentityAlwaysColumn()
-                .HasColumnName("id");
+                .HasColumnName("order_product_id");
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
 
@@ -124,9 +123,7 @@ public partial class KarpovContext : DbContext
                 .HasColumnName("product_id");
             entity.Property(e => e.Cost).HasColumnName("cost");
             entity.Property(e => e.Count).HasColumnName("count");
-            entity.Property(e => e.Image)
-                .HasColumnType("character varying")
-                .HasColumnName("image");
+            entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.ProductName)
                 .HasColumnType("character varying")
                 .HasColumnName("product_name");
@@ -159,15 +156,11 @@ public partial class KarpovContext : DbContext
             entity.Property(e => e.Fullname)
                 .HasColumnType("character varying")
                 .HasColumnName("fullname");
-            entity.Property(e => e.Login)
-                .HasColumnType("character varying")
-                .HasColumnName("login");
+            entity.Property(e => e.Login).HasColumnName("login");
             entity.Property(e => e.Passport)
                 .HasColumnType("character varying")
                 .HasColumnName("passport");
-            entity.Property(e => e.Password)
-                .HasColumnType("character varying")
-                .HasColumnName("password");
+            entity.Property(e => e.Password).HasColumnName("password");
             entity.Property(e => e.Phone)
                 .HasColumnType("character varying")
                 .HasColumnName("phone");
@@ -175,28 +168,29 @@ public partial class KarpovContext : DbContext
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("user_roleid_fkey");
         });
 
         modelBuilder.Entity<UserComment>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("user_comment");
+            entity.HasKey(e => e.UserCommentId).HasName("user_comment_pkey");
 
-            entity.Property(e => e.Commentid)
-                .ValueGeneratedOnAdd()
+            entity.ToTable("user_comment");
+
+            entity.Property(e => e.UserCommentId)
                 .UseIdentityAlwaysColumn()
-                .HasColumnName("commentid");
-            entity.Property(e => e.Productid).HasColumnName("productid");
-            entity.Property(e => e.Userid).HasColumnName("userid");
+                .HasColumnName("user_comment_id");
+            entity.Property(e => e.Comment).HasColumnName("comment");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.Product).WithMany()
-                .HasForeignKey(d => d.Productid)
+            entity.HasOne(d => d.Product).WithMany(p => p.UserComments)
+                .HasForeignKey(d => d.ProductId)
                 .HasConstraintName("usercomment_productid_fkey");
 
-            entity.HasOne(d => d.User).WithMany()
-                .HasForeignKey(d => d.Userid)
+            entity.HasOne(d => d.User).WithMany(p => p.UserComments)
+                .HasForeignKey(d => d.UserId)
                 .HasConstraintName("usercomment_userid_fkey");
         });
 

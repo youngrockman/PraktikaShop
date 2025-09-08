@@ -24,7 +24,13 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/BasketWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/CatalogWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/EditWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/MainWindow.axaml]
