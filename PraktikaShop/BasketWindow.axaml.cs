@@ -10,4 +10,7 @@ public partial class BasketWindow : Window
     {
         InitializeComponent();
     }
+
+
+    
 }

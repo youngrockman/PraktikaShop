@@ -24,6 +24,29 @@ public partial class Product
         }
     }
 
+    public int Discount
+    {
+        get
+        {
+
+            if (Cost >= 1000)
+            {
+                return 10;
+            }
+
+            if (Cost >= 5000)
+            {
+                return 25;
+            }
+
+            return 0;
+
+        }
+    }
+
+
+    
+
     public virtual ICollection<BasketProduct> BasketProducts { get; set; } = new List<BasketProduct>();
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();

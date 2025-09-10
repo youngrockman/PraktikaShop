@@ -6,35 +6,53 @@
         x:Class="PraktikaShop.BasketWindow"
 		x:CompileBindings="False"
         Title="Корзина">
-	<DockPanel>
-		<StackPanel DockPanel.Dock="Top" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-			<TextBlock Text="Добро пожаловать в корзину"/>
-		</StackPanel>
-
-		<StackPanel DockPanel.Dock="Bottom" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button Content="Вернуться к списку товаров" Margin="5"/>
-			<Button Content="Создать заказ" Margin="5"/>
-		</StackPanel>
-<!--
-		<ListBox>
-			<ListBox.ItemsPanel>
+	<Grid
+		ColumnDefinitions="*,*,*,*"
+		RowDefinitions="*,*,*,*">
+		<TextBlock Grid.Column="1"
+				   Grid.Row="0"
+				   Grid.ColumnSpan="2"
+				   Text="Ваша корзина"
+				   HorizontalAlignment="Center"
+				   FontSize="18"/>
+		<ListBox Grid.Column="1"
+				 Grid.ColumnSpan="2"
+				 Grid.Row="1"
+				 Grid.RowSpan="2"
+				 Name="BasketListBox">
+			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Padding="10">
-						<DockPanel>
-							<Image Margin="5" Source="{Binding ParseImage}" DockPanel.Dock="Left" VerticalAlignment="Top" />
-							<StackPanel Margin="5" VerticalAlignment="Center">
-								<TextBlock Text="{Binding ProductName, StringFormat='Название товара: {0}'}"
-                                               FontWeight="Bold"/>
-								<TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0} руб.'}"
-										   Margin="0,5,0,0"/>
-								<TextBlock Text="{Binding Count, StringFormat='Осталось товара: {0} шт.'}"
-										   Margin="0,5,0,0"/>
-							</StackPanel>
-						</DockPanel>						
-					</Border>
+					<StackPanel>
+						<Image  Height="80" Width="80" Source="{Binding ParseImage}" Margin="5"></Image>\
+						<TextBlock Text="{Binding ProductName, StringFormat='Название товара: {0}'}" Margin="5"/>
+						<TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0} руб'}" Margin="5"/>
+						<TextBlock Text="{Binding Count, StringFormat='Количество товара: {0}'}" Margin="5"/>
+						<TextBlock Text="{Binding Discount, StringFormat='Скидка: {0} %'}" Margin="5"/>
+						<Button Grid.Column="3"
+				Grid.Row="1"
+				Grid.RowSpan="2"
+				Content="Убрать из корзины"
+				Margin="5"
+				Tag="{Binding ProductId}"/>
+					</StackPanel>
 				</DataTemplate>
-			</ListBox.ItemsPanel>
-		</ListBox> -->
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<Button Grid.Column="2" 
+				Grid.Row="3"
+				Grid.ColumnSpan="1"
+				Content="Выйти"
+				HorizontalAlignment="Center"/>
 		
-	</DockPanel>
+		<Button Grid.Column="1"
+				Grid.Row="3"
+				Grid.ColumnSpan="1"
+				HorizontalAlignment="Center"
+				Content="Создать заказ"
+				/>
+		
+		
+		
+
+	</Grid>
 </Window>

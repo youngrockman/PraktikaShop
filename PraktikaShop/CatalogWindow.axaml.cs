@@ -21,7 +21,22 @@ public partial class CatalogWindow : Window
         OrderBox.SelectionChanged += OrderBox_SelectionChanged;
         SeacrhBox.KeyUp += SeacrhBox_KeyUp;
         CatalogListBox.SelectionChanged += SelectionProduct;
+        ItemsBox.SelectionChanged += ItemsBox_SelectionChanged;
+        LoadCombobox();
+    }
 
+
+    private void LoadCombobox()
+    {
+        using var context = new KarpovContext();
+        var items = context.Products.Select(x => x.ProductName).ToList();
+        ItemsBox.ItemsSource = items;
+    }
+    
+    private void ItemsBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+
+        LoadProducts();
     }
 
     private async void SelectionProduct(object? sender, SelectionChangedEventArgs e)
@@ -48,8 +63,8 @@ public partial class CatalogWindow : Window
     {
         using var context = new KarpovContext();
         var allProducts = await context.Products.ToListAsync();
+        
 
- 
 
         switch (OrderBox.SelectedIndex)
         {
@@ -67,11 +82,17 @@ public partial class CatalogWindow : Window
             allProducts = allProducts.Where(x=>x.ProductName.Contains(SeacrhBox.Text)).ToList();
         }
 
+        if (ItemsBox.SelectionBoxItem != null)
+        {
+            allProducts = allProducts.Where(x => x.ProductName == ItemsBox.SelectedItem.ToString()).ToList();
+        }
+       
 
 
 
 
-        CatalogListBox.ItemsSource = allProducts;
+
+            CatalogListBox.ItemsSource = allProducts;
     }
 
     private async void DeleteProduct_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -100,8 +121,15 @@ public partial class CatalogWindow : Window
 
     }
 
+    private void BasketClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var basketWindow = new BasketWindow();
+        basketWindow.Show();
+        Close(this);
+    }
 
-    
+
+
 
 
 
