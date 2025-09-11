@@ -2,57 +2,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:numeric="http://schemas.avaloniaui.net/2022"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PraktikaShop.BasketWindow"
 		x:CompileBindings="False"
         Title="Корзина">
-	<Grid
-		ColumnDefinitions="*,*,*,*"
-		RowDefinitions="*,*,*,*">
-		<TextBlock Grid.Column="1"
-				   Grid.Row="0"
-				   Grid.ColumnSpan="2"
-				   Text="Ваша корзина"
-				   HorizontalAlignment="Center"
-				   FontSize="18"/>
-		<ListBox Grid.Column="1"
-				 Grid.ColumnSpan="2"
-				 Grid.Row="1"
-				 Grid.RowSpan="2"
-				 Name="BasketListBox">
+
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+			<TextBlock Text="Ваша корзина" FontSize="18" FontWeight="Bold"/>
+		</StackPanel>
+
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Spacing="10">
+			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
+			<Button Content="Выйти" Click="ExitClick"/>
+		</StackPanel>
+
+		<ListBox x:Name="BasketListBox">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel>
-						<Image  Height="80" Width="80" Source="{Binding ParseImage}" Margin="5"></Image>\
-						<TextBlock Text="{Binding ProductName, StringFormat='Название товара: {0}'}" Margin="5"/>
-						<TextBlock Text="{Binding Cost, StringFormat='Стоимость: {0} руб'}" Margin="5"/>
-						<TextBlock Text="{Binding Count, StringFormat='Количество товара: {0}'}" Margin="5"/>
-						<TextBlock Text="{Binding Discount, StringFormat='Скидка: {0} %'}" Margin="5"/>
-						<Button Grid.Column="3"
-				Grid.Row="1"
-				Grid.RowSpan="2"
-				Content="Убрать из корзины"
-				Margin="5"
-				Tag="{Binding ProductId}"/>
-					</StackPanel>
+					<Border Margin="10" BorderThickness="1" BorderBrush="Gray" Padding="10">
+						<DockPanel>
+							<Image Width="80" Height="80" Source="{Binding Product.ParseImage}"
+                                   DockPanel.Dock="Left" Margin="0,0,10,0"/>
+
+							<StackPanel>
+								<TextBlock Text="{Binding Product.ProductName}" FontWeight="Bold"/>
+								<TextBlock Text="{Binding Product.Cost, StringFormat='Цена: {0} руб.'}"/>
+
+								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
+									<TextBlock Text="Количество:" VerticalAlignment="Center"/>
+									<NumericUpDown Value="{Binding ProductCount}"
+                                                          Minimum="1"
+                                                          Maximum="{Binding Product.Count}"
+                                                          Width="80"
+                                                          ValueChanged="Quantity_ValueChanged"/>
+								</StackPanel>
+
+								<TextBlock Text="{Binding ProductCount, StringFormat='Итого: {0} руб.'}"
+                                           Margin="0,5,0,0"/>
+								<Button Content="Удалить" Tag="{Binding BasketProductId}"
+                                        Click="RemoveFromBasket_Click" Margin="0,10,0,0"/>
+							</StackPanel>
+						</DockPanel>
+					</Border>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Button Grid.Column="2" 
-				Grid.Row="3"
-				Grid.ColumnSpan="1"
-				Content="Выйти"
-				HorizontalAlignment="Center"/>
-		
-		<Button Grid.Column="1"
-				Grid.Row="3"
-				Grid.ColumnSpan="1"
-				HorizontalAlignment="Center"
-				Content="Создать заказ"
-				/>
-		
-		
-		
-
-	</Grid>
+	</DockPanel>
 </Window>

@@ -39,7 +39,7 @@
 									<TextBlock Text="{Binding Count, StringFormat='Осталось товара: {0} шт.'}"
                                                Margin="0,5,0,0"/>
 									<TextBlock Text="{Binding Discount, StringFormat='Скидка: {0} %'}"></TextBlock>
-									<Button Margin="5" Tag="{Binding ProductId}" Content="Добавить в корзину" ></Button>
+									<Button Margin="5" Tag="{Binding ProductId}" Content="Добавить в корзину" Click="AddInBasket_Click"/>
 									<Button Margin="5" Tag="{Binding ProductId}" Content="Удалить" Click="DeleteProduct_Click"/>
 								</StackPanel>
 							</DockPanel>

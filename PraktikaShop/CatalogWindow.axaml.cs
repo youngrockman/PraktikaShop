@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +9,22 @@ using PraktikaShop.Models;
 using System;
 using System.IO;
 using System.Linq;
-using Avalonia.Input;
 
 namespace PraktikaShop;
 
 public partial class CatalogWindow : Window
 {
+        readonly int _currentUserId;
 
     public CatalogWindow()
     {
+        InitializeComponent();
+        
+    }
+
+    public CatalogWindow(int userId)
+    {
+        _currentUserId = userId;
         InitializeComponent();
         LoadProducts();
         OrderBox.SelectionChanged += OrderBox_SelectionChanged;
@@ -121,23 +130,59 @@ public partial class CatalogWindow : Window
 
     }
 
-    private void BasketClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+
+
+    private async void AddInBasket_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var basketWindow = new BasketWindow();
+        if (sender is Button button && button.Tag is int productId )
+        {
+            using var context = new KarpovContext();
+
+            
+            var product = await context.Products.FindAsync(productId);
+            if (product == null) return;
+
+            var basket = await context.Baskets.FirstOrDefaultAsync((b => b.UserId == _currentUserId));
+
+            if (basket == null)
+            {
+                basket = new Basket { UserId = _currentUserId };
+                context.Baskets.Add(basket);
+                await context.SaveChangesAsync();
+            }
+
+            var basketItem = await context.BasketProducts.FirstOrDefaultAsync(x=>x.BasketId == basket.BasketId && x.ProductId == productId);
+
+            if (basketItem != null)
+            {
+                basketItem.ProductCount += 1;
+            }
+
+            else
+            {
+                basketItem = new BasketProduct
+                {
+                    BasketId = basket.BasketId,
+                    ProductId = productId,
+                    ProductCount = 1
+                };
+
+                context.BasketProducts.Add(basketItem);
+            }
+
+            await context.SaveChangesAsync();
+            Console.WriteLine("Товар добавлен в корзину");
+
+        }
+    }
+
+    private void BasketClick(object? sender, RoutedEventArgs e)
+    {
+
+        var basketWindow = new BasketWindow(_currentUserId);
         basketWindow.Show();
         Close(this);
     }
 
-
-
-
-
-
-    //private void AddInBasket_Click(object? sender, EventArgs e)
-    //{
-
-    //}
-
-
-
+   
 }

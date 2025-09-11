@@ -29,7 +29,7 @@ namespace PraktikaShop
 
             if (user != null)
             {
-                var catalogWindow = new CatalogWindow();
+                var catalogWindow = new CatalogWindow(user.UserId);
                 catalogWindow.Show();
                 Close();
             }
