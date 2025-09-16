@@ -2,10 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:numeric="http://schemas.avaloniaui.net/2022"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PraktikaShop.BasketWindow"
-		x:CompileBindings="False"
+        x:CompileBindings="False"
         Title="Корзина">
 
 	<DockPanel>
@@ -14,11 +13,12 @@
 		</StackPanel>
 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Spacing="10">
+			<TextBlock x:Name="TotalPriceText" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
 			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
 			<Button Content="Выйти" Click="ExitClick"/>
 		</StackPanel>
 
-		<ListBox x:Name="BasketListBox">
+		<ListBox x:Name="BasketListBox" Height="300">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Border Margin="10" BorderThickness="1" BorderBrush="Gray" Padding="10">
@@ -32,15 +32,15 @@
 
 								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0">
 									<TextBlock Text="Количество:" VerticalAlignment="Center"/>
-									<NumericUpDown Value="{Binding ProductCount}"
-                                                          Minimum="1"
-                                                          Maximum="{Binding Product.Count}"
-                                                          Width="80"
-                                                          ValueChanged="Quantity_ValueChanged"/>
+									<Button Content="-" Width="30" Tag="{Binding BasketProductId}"
+                                            Click="DecreaseQuantity_Click"/>
+									<TextBox Text="{Binding ProductCount}" Width="50" IsReadOnly="True"
+                                             TextAlignment="Center"/>
+									<Button Content="+" Width="30" Tag="{Binding BasketProductId}"
+                                            Click="IncreaseQuantity_Click"/>
 								</StackPanel>
 
-								<TextBlock Text="{Binding ProductCount, StringFormat='Итого: {0} руб.'}"
-                                           Margin="0,5,0,0"/>
+								<TextBlock Name="TotalPriceText" Margin="0,5,0,0"/>
 								<Button Content="Удалить" Tag="{Binding BasketProductId}"
                                         Click="RemoveFromBasket_Click" Margin="0,10,0,0"/>
 							</StackPanel>

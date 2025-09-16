@@ -5,14 +5,15 @@ using Avalonia.Markup.Xaml;
 using Microsoft.EntityFrameworkCore;
 using PraktikaShop.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+
 
 namespace PraktikaShop;
 
 public partial class BasketWindow : Window
 {
     private readonly int _currentUserId;
-
     public BasketWindow()
     {
         InitializeComponent();
@@ -42,20 +43,47 @@ public partial class BasketWindow : Window
             .ToListAsync();
 
         BasketListBox.ItemsSource = basketItems;
+        CalculateTotalPrice(); 
     }
 
-    private async void Quantity_ValueChanged(object? sender, NumericUpDownValueChangedEventArgs e)
+    private async void IncreaseQuantity_Click(object? sender, RoutedEventArgs e)
     {
-        if (sender is NumericUpDown numericUpDown && numericUpDown.DataContext is BasketProduct basketItem)
+        if (sender is Button button && button.Tag is int basketProductId)
         {
             using var context = new KarpovContext();
 
-            var itemToUpdate = await context.BasketProducts
-                .FirstOrDefaultAsync(bp => bp.BasketProductId == basketItem.BasketProductId);
+            var basketItem = await context.BasketProducts
+                .Include(bp => bp.Product)
+                .FirstOrDefaultAsync(bp => bp.BasketProductId == basketProductId);
 
-            if (itemToUpdate != null)
+            if (basketItem != null && basketItem.ProductCount < basketItem.Product.Count)
             {
-                itemToUpdate.ProductCount = (int)e.NewValue;
+                basketItem.ProductCount++;
+                await context.SaveChangesAsync();
+                LoadBasket(); 
+            }
+        }
+    }
+
+    private async void DecreaseQuantity_Click(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.Tag is int basketProductId)
+        {
+            using var context = new KarpovContext();
+
+            var basketItem = await context.BasketProducts
+                .FirstOrDefaultAsync(bp => bp.BasketProductId == basketProductId);
+
+            if (basketItem != null)
+            {
+                if (basketItem.ProductCount > 1)
+                {
+                    basketItem.ProductCount--;
+                }
+                else
+                {
+                    context.BasketProducts.Remove(basketItem);
+                }
                 await context.SaveChangesAsync();
                 LoadBasket(); 
             }
@@ -80,8 +108,25 @@ public partial class BasketWindow : Window
         }
     }
 
+    
+    private void CalculateTotalPrice()
+    {
+        if (BasketListBox.ItemsSource is System.Collections.IEnumerable items)
+        {
+            decimal totalPrice = 0;
+            foreach (BasketProduct item in items)
+            {
+                totalPrice += (item.Product.Cost ?? 0) * item.ProductCount;
+            }
+
+            TotalPriceText.Text = $"Общая стоимость: {totalPrice} руб.";
+        }
+    }
+
     private void CreateOrder_Click(object? sender, RoutedEventArgs e)
     {
-        Console.WriteLine("Заказ создан!");
+        var orderWindow = new OrderWindow(_currentUserId);
+        orderWindow.Show();
+        Close(this);
     }
 }

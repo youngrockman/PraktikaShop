@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PraktikaShop.OrderWindow"
+		x:CompileBindings="False"
+        Title="Оформление заказа">
+
+	<DockPanel>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" DockPanel.Dock="Top">
+			<TextBlock Text="Оформление заказа" FontSize="18" FontWeight="Bold"/>
+		</StackPanel>
+
+		<StackPanel DockPanel.Dock="Bottom" Margin="5" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
+			<TextBlock x:Name="TotalPriceText" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+			<Button Margin="5" Content="Оформить заказ" Click="CreateOrderClick"/>
+			<Button Margin="5" Content="Назад" Click="BackButton_Click"/>
+		</StackPanel>
+
+		<ScrollViewer>
+			<ListBox x:Name="OrderBox">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Border Margin="10" BorderThickness="1" BorderBrush="Gray" Padding="10">
+							<StackPanel>
+								<TextBlock Text="{Binding Product.ProductName}" FontWeight="Bold"/>
+								<TextBlock Text="{Binding Product.Cost, StringFormat='Цена: {0} руб.'}"/>
+								<TextBlock Text="{Binding ProductCount, StringFormat='Количество: {0} шт.'}"/>
+								<TextBlock Text="{Binding TotalPriceText}"/>
+							</StackPanel>
+						</Border>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+	</DockPanel>
+</Window>

@@ -36,5 +36,8 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/OrderWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/demo/source/repos/PraktikaShop/PraktikaShop/RegistrationWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

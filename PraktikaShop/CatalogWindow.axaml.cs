@@ -138,18 +138,8 @@ public partial class CatalogWindow : Window
         {
             using var context = new KarpovContext();
 
-            
-            var product = await context.Products.FindAsync(productId);
-            if (product == null) return;
-
             var basket = await context.Baskets.FirstOrDefaultAsync((b => b.UserId == _currentUserId));
 
-            if (basket == null)
-            {
-                basket = new Basket { UserId = _currentUserId };
-                context.Baskets.Add(basket);
-                await context.SaveChangesAsync();
-            }
 
             var basketItem = await context.BasketProducts.FirstOrDefaultAsync(x=>x.BasketId == basket.BasketId && x.ProductId == productId);
 
@@ -171,7 +161,7 @@ public partial class CatalogWindow : Window
             }
 
             await context.SaveChangesAsync();
-            Console.WriteLine("Товар добавлен в корзину");
+
 
         }
     }
