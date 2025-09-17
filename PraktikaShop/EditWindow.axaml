@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
         x:Class="PraktikaShop.EditWindow"
 		x:CompileBindings="False"
+		Icon="Images/logo.ico"
         Title="Редактирование товара">
 
 	<StackPanel Margin="20" Spacing="10">

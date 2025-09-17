@@ -4,10 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PraktikaShop.MainWindow"
+		Icon="Images/logo.ico"
         Title="Экран авторизации">
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-			<TextBlock Text="Добро пожаловать в магазин MarkLox "/>
+			<TextBlock Text="Добро пожаловать в магазин IvanPrime "/>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
 			<Button Content="Выйти" Margin="5" Click="ExitClick"/>

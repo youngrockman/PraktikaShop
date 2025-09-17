@@ -55,7 +55,7 @@ public partial class OrderWindow : Window
 
     private void BackButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var basketWindow = new BasketWindow();
+        var basketWindow = new BasketWindow(_currentUserId);
         basketWindow.Show();
         Close(this);
     }

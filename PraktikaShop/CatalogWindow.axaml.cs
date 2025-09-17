@@ -39,7 +39,8 @@ public partial class CatalogWindow : Window
     {
         using var context = new KarpovContext();
         var items = context.Products.Select(x => x.ProductName).ToList();
-        ItemsBox.ItemsSource = items;
+        items.Add("Все продукты");
+        ItemsBox.ItemsSource = items.OrderByDescending(x=>x == "Все продукты");
     }
     
     private void ItemsBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -52,7 +53,7 @@ public partial class CatalogWindow : Window
     {
         var product = CatalogListBox.SelectedItem as Product;
 
-        var editWindow = new EditWindow(product);
+        var editWindow = new EditWindow(product, _currentUserId);
         editWindow.Show();
         this.Close();
         
@@ -88,12 +89,13 @@ public partial class CatalogWindow : Window
 
         if (SeacrhBox.Text != null && SeacrhBox.Text != "")
         {
-            allProducts = allProducts.Where(x=>x.ProductName.Contains(SeacrhBox.Text)).ToList();
+            var searchText = SeacrhBox.Text.ToLower();
+            allProducts = allProducts.Where(x=>x.ProductName.ToLower().Contains(searchText)).ToList();
         }
 
-        if (ItemsBox.SelectionBoxItem != null)
+        if (ItemsBox.SelectionBoxItem != null && ItemsBox.SelectionBoxItem.ToString() != "Все продукты")
         {
-            allProducts = allProducts.Where(x => x.ProductName == ItemsBox.SelectedItem.ToString()).ToList();
+            allProducts = allProducts.Where(x => x.ProductName == ItemsBox.SelectedItem.ToString()).ToList() ;
         }
        
 
@@ -144,7 +146,7 @@ public partial class CatalogWindow : Window
             var basketItem = await context.BasketProducts.FirstOrDefaultAsync(x=>x.BasketId == basket.BasketId && x.ProductId == productId);
 
             if (basketItem != null)
-            {
+            { 
                 basketItem.ProductCount += 1;
             }
 
