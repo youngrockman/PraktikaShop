@@ -27,8 +27,8 @@
 		<Button Content="Выбрать изображение" HorizontalAlignment="Center" Click="ChangeImage"/>
 
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
-			<Button Content="Сохранить" Click="SaveButton_Click" Width="100"/>
-			<Button Content="Назад" Click="BackButton_Click" Width="100"/>
+			<Button Content="Сохранить" Click="SaveButton_Click" Width="100" Background="Yellow"/>
+			<Button Content="Назад" Click="BackButton_Click" Width="100" Background="Yellow"/>
 		</StackPanel>
 	</StackPanel>
 </Window>

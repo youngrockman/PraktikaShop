@@ -176,5 +176,10 @@ public partial class CatalogWindow : Window
         Close(this);
     }
 
-   
+    private void AddButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var addProductWindow = new AddProductWindow(_currentUserId);
+        addProductWindow.Show();
+        this.Close();
+    }
 }

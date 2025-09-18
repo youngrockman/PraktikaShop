@@ -15,8 +15,8 @@
 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Spacing="10">
 			<TextBlock x:Name="TotalPriceText" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
-			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
-			<Button Content="Выйти" Click="ExitClick"/>
+			<Button Content="Создать заказ" Click="CreateOrder_Click"	Background="Yellow"/>
+			<Button Content="Выйти" Click="ExitClick" Background="Yellow"/>
 		</StackPanel>
 
 		<ListBox x:Name="BasketListBox" Height="300">

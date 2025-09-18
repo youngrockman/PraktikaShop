@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PraktikaShop.AddProductWindow"
+		Icon="/Images/logo.ico"
+        Title="Окно добавления товара">
+	<Grid RowDefinitions="*,*,*,*,*"
+		  ColumnDefinitions="*,*,*,*">
+		<TextBlock Grid.Column="1"  Grid.ColumnSpan="2" Text="Название продукта" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<TextBox Name="NameBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="20" Width="200"/>
+		<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Количество" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<TextBox Name="CountBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Width="200"/>
+		<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Цена" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+		<TextBox Name="CostBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" Width="200"/>
+		<Button Background="Yellow" Grid.Column="1" Grid.Row="3" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Выберете изображение" Margin="5" HorizontalContentAlignment="Center" Click="AddImage_Click" />
+		<Button Background="Yellow" Grid.Column="2" Grid.Row="3" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Назад" Margin="5" HorizontalContentAlignment="Center" Click="Back_Click"  />
+		<Button Background="Yellow" Grid.Column="1" Grid.Row="4" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Добавить товар" Margin="5" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Click="AddProduct_Click"/>
+	</Grid>
+	
+	
+</Window>
+  

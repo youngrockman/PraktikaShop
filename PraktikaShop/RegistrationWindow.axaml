@@ -13,8 +13,8 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" DockPanel.Dock="Bottom">
-			<Button Content="Назад" Margin="5" Click="BackButton"/>
-			<Button Content="Зарегестрироваться" Click="RegistrationButton" Margin="5" />
+			<Button Content="Назад" Margin="5" Click="BackButton" Background="Yellow"/>
+			<Button Content="Зарегестрироваться" Click="RegistrationButton" Margin="5" Background="Yellow" />
 		</StackPanel>
 
 		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

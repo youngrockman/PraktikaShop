@@ -11,9 +11,9 @@
 			<TextBlock Text="Добро пожаловать в магазин IvanPrime "/>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-			<Button Content="Выйти" Margin="5" Click="ExitClick"/>
-			<Button Content="Регистрация" Margin="5" Click="RegistrationButton"/>
-			<Button Content="Войти" Margin="5" Click="LoginClick"/>
+			<Button Content="Выйти" Margin="5" Click="ExitClick" Background="Yellow"/>
+			<Button Content="Регистрация" Margin="5" Click="RegistrationButton" Background="Yellow"/>
+			<Button Content="Войти" Margin="5" Click="LoginClick" Background="Yellow"/>
 		</StackPanel>
 		<StackPanel Margin="5" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
 			<TextBlock Text="Логин" Margin="5"/>

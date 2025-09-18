@@ -20,8 +20,9 @@
 		</StackPanel>
 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-			<Button Content="Выйти" Margin="5" Click="Exit_Click"/>
-			<Button Margin="5" Content="Посмотреть корзину" Click="BasketClick"/>
+			<Button Content="Выйти" Margin="5" Click="Exit_Click" Background="Yellow"/>
+			<Button Margin="5" Content="Посмотреть корзину" Click="BasketClick" Background="Yellow"/>
+			<Button Margin="5" Content="Добавить товар" Click="AddButton_Click" Background="Yellow"/>
 		</StackPanel>
 		
 			<ListBox x:Name="CatalogListBox" Height="400" >
@@ -41,8 +42,8 @@
 									<TextBlock Text="{Binding Count, StringFormat='Осталось товара: {0} шт.'}"
                                                Margin="0,5,0,0"/>
 									<TextBlock Text="{Binding Discount, StringFormat='Скидка: {0} %'}"></TextBlock>
-									<Button Margin="5" Tag="{Binding ProductId}" Content="Добавить в корзину" Click="AddInBasket_Click"/>
-									<Button Margin="5" Tag="{Binding ProductId}" Content="Удалить" Click="DeleteProduct_Click"/>
+									<Button Margin="5" Tag="{Binding ProductId}" Content="Добавить в корзину" Click="AddInBasket_Click" Background="Yellow"/>
+									<Button Margin="5" Tag="{Binding ProductId}" Content="Удалить" Click="DeleteProduct_Click" Background="Yellow"/>
 								</StackPanel>
 							</DockPanel>
 						</Border>

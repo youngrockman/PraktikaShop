@@ -101,6 +101,7 @@ public partial class EditWindow : Window
             AllowMultiple = false
         });
 
+
         MainImage.Source = new Bitmap(files[0].Path.LocalPath);
 
         string nameImage = Guid.NewGuid().ToString("N");
