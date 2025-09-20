@@ -7,6 +7,8 @@ using PraktikaShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 
 namespace PraktikaShop;
@@ -119,12 +121,25 @@ public partial class BasketWindow : Window
                 totalPrice += (item.Product.Cost ?? 0) * item.ProductCount;
             }
 
-            TotalPriceText.Text = $"����� ���������: {totalPrice} ���.";
+            TotalPriceText.Text = $"Общая стоимость: {totalPrice} руб.";
         }
     }
 
-    private void CreateOrder_Click(object? sender, RoutedEventArgs e)
+    private async void CreateOrder_Click(object? sender, RoutedEventArgs e)
     {
+        using var context = new KarpovContext();
+        var basketItemsCount = await context.BasketProducts
+            .Include(x => x.Basket)
+            .Where(x => x.Basket.UserId == _currentUserId)
+            .CountAsync();
+
+        if (basketItemsCount == 0)
+        {
+            var messageBox = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Корзина пуста. Добавьте товары перед оформлением заказа.", ButtonEnum.Ok,MsBox.Avalonia.Enums.Icon.Warning);
+            await messageBox.ShowAsync();
+            return;
+        }
+        
         var orderWindow = new OrderWindow(_currentUserId);
         orderWindow.Show();
         Close(this);

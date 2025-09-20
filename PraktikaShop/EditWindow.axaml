@@ -24,7 +24,7 @@
 		<Image Name="MainImage" Height="250" 
 			   Width="250"
 			   Margin="5"/>
-		<Button Content="Выбрать изображение" HorizontalAlignment="Center" Click="ChangeImage"/>
+		<Button Content="Выбрать изображение" HorizontalAlignment="Center" Click="ChangeImage" Background="Yellow"/>
 
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
 			<Button Content="Сохранить" Click="SaveButton_Click" Width="100" Background="Yellow"/>

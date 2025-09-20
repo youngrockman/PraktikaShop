@@ -9,6 +9,8 @@ using PraktikaShop.Models;
 using System;
 using System.IO;
 using System.Linq;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace PraktikaShop;
 
@@ -39,8 +41,8 @@ public partial class CatalogWindow : Window
     {
         using var context = new KarpovContext();
         var items = context.Products.Select(x => x.ProductName).ToList();
-        items.Add("��� ��������");
-        ItemsBox.ItemsSource = items.OrderByDescending(x=>x == "��� ��������");
+        items.Add("��� ��������");
+        ItemsBox.ItemsSource = items.OrderByDescending(x=>x == "��� ��������");
     }
     
     private void ItemsBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -93,7 +95,7 @@ public partial class CatalogWindow : Window
             allProducts = allProducts.Where(x=>x.ProductName.ToLower().Contains(searchText)).ToList();
         }
 
-        if (ItemsBox.SelectionBoxItem != null && ItemsBox.SelectionBoxItem.ToString() != "��� ��������")
+        if (ItemsBox.SelectionBoxItem != null && ItemsBox.SelectionBoxItem.ToString() != "��� ��������")
         {
             allProducts = allProducts.Where(x => x.ProductName == ItemsBox.SelectedItem.ToString()).ToList() ;
         }
@@ -134,22 +136,43 @@ public partial class CatalogWindow : Window
 
 
 
-    private async void AddInBasket_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void AddInBasket_Click(object? sender, RoutedEventArgs e)
     {
-        if (sender is Button button && button.Tag is int productId )
+        if (sender is Button button && button.Tag is int productId)
         {
             using var context = new KarpovContext();
-
-            var basket = await context.Baskets.FirstOrDefaultAsync((b => b.UserId == _currentUserId));
-
-
-            var basketItem = await context.BasketProducts.FirstOrDefaultAsync(x=>x.BasketId == basket.BasketId && x.ProductId == productId);
+            var product = await context.Products.FindAsync(productId);
+            if (product == null || product.Count <= 0)
+            {
+                var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Товар недоступен", ButtonEnum.Ok,
+                    MsBox.Avalonia.Enums.Icon.Error);
+                await message.ShowAsync();
+                return;
+            }
+        
+            var basket = await context.Baskets.FirstOrDefaultAsync(b => b.UserId == _currentUserId);
+            if (basket == null)
+            {
+                basket = new Basket { UserId = _currentUserId };
+                context.Baskets.Add(basket);
+                await context.SaveChangesAsync();
+            }
+        
+            var basketItem = await context.BasketProducts
+                .FirstOrDefaultAsync(x => x.BasketId == basket.BasketId && x.ProductId == productId);
 
             if (basketItem != null)
-            { 
+            {
+                if (basketItem.ProductCount + 1 > product.Count)
+                {
+                    var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Нельзя добавить больше товара, чем есть в наличии", ButtonEnum.Ok,
+                        MsBox.Avalonia.Enums.Icon.Error);
+                    await message.ShowAsync();
+                    return;
+                }
+            
                 basketItem.ProductCount += 1;
             }
-
             else
             {
                 basketItem = new BasketProduct
@@ -158,13 +181,10 @@ public partial class CatalogWindow : Window
                     ProductId = productId,
                     ProductCount = 1
                 };
-
                 context.BasketProducts.Add(basketItem);
             }
 
             await context.SaveChangesAsync();
-
-
         }
     }
 

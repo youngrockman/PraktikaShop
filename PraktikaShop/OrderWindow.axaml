@@ -2,38 +2,114 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" 
         x:Class="PraktikaShop.OrderWindow"
-		x:CompileBindings="False"
-		Icon="Images/logo.ico"
-        Title="Оформление заказа">
+        Icon="Images/logo.ico"
+        x:CompileBindings="False"
+        Title="Оформление заказа"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        SizeToContent="WidthAndHeight"
+        MinWidth="800"
+        MinHeight="500">
 
-	<DockPanel>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" DockPanel.Dock="Top">
-			<TextBlock Text="Оформление заказа" FontSize="18" FontWeight="Bold"/>
-		</StackPanel>
-
-		<StackPanel DockPanel.Dock="Bottom" Margin="5" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="10">
-			<TextBlock x:Name="TotalPriceText" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
-			<Button Margin="5" Content="Оформить заказ" Click="CreateOrderClick" Background="Yellow"/>
-			<Button Margin="5" Content="Назад" Click="BackButton_Click" Background="Yellow"/>
-		</StackPanel>
-
-		<ScrollViewer>
-			<ListBox x:Name="OrderBox">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Border Margin="10" BorderThickness="1" BorderBrush="Gray" Padding="10">
-							<StackPanel>
-								<TextBlock Text="{Binding Product.ProductName}" FontWeight="Bold"/>
-								<TextBlock Text="{Binding Product.Cost, StringFormat='Цена: {0} руб.'}"/>
-								<TextBlock Text="{Binding ProductCount, StringFormat='Количество: {0} шт.'}"/>
-								<TextBlock Text="{Binding TotalPriceText}"/>
-							</StackPanel>
-						</Border>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-		</ScrollViewer>
-	</DockPanel>
+    <Grid Background="#F5F5F5">
+        <Border Background="#2C3E50" 
+                Height="70" 
+                VerticalAlignment="Top">
+            <TextBlock Text="Оформление заказа" 
+                       Foreground="White" 
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Border>
+        
+        <Border Margin="20,80,20,80" 
+                Background="White" 
+                CornerRadius="10">
+            <ScrollViewer>
+                <ListBox x:Name="OrderBox" 
+                         Background="Transparent" 
+                         BorderThickness="0"
+                         Padding="10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="10" 
+                                    BorderThickness="1" 
+                                    BorderBrush="#EAEAEA" 
+                                    CornerRadius="8" 
+                                    Padding="15"
+                                    Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="5">
+                                        <TextBlock Text="{Binding Product.ProductName}" 
+                                                   FontSize="16" 
+                                                   FontWeight="Bold"
+                                                   Foreground="#2C3E50"/>
+                                        
+                                        <StackPanel Orientation="Horizontal" Spacing="15">
+                                            <TextBlock Text="{Binding Product.Cost, StringFormat='Цена: {0} руб.'}" 
+                                                       FontSize="14"
+                                                       Foreground="#555"/>
+                                            
+                                            <TextBlock Text="{Binding ProductCount, StringFormat='Количество: {0} шт.'}" 
+                                                       FontSize="14"
+                                                       Foreground="#555"/>
+                                        </StackPanel>
+                                        
+                                        <TextBlock Text="{Binding TotalPriceText}" 
+                                                   FontSize="14"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#27AE60"
+                                                   Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Border>
+        
+        <Border Background="White" 
+                Height="70" 
+                VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Spacing="20">
+                <TextBlock x:Name="TotalPriceText" 
+                           FontSize="16" 
+                           FontWeight="Bold"
+                           Foreground="#2C3E50"
+                           VerticalAlignment="Center"/>
+                
+                <Button Content="Оформить заказ" 
+                        Click="CreateOrderClick" 
+                        Background="#FFFFD700"
+                        Foreground="#2C3E50"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        CornerRadius="5"
+                        Width="150"
+                        Height="40"/>
+                        
+                <Button Content="Назад" 
+                        Click="BackButton_Click" 
+                        Background="#FFFFD700"
+                        Foreground="#2C3E50"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        CornerRadius="5"
+                        Width="100"
+                        Height="40"/>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>

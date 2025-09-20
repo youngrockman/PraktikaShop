@@ -2,23 +2,118 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" 
         x:Class="PraktikaShop.AddProductWindow"
-		Icon="/Images/logo.ico"
-        Title="Окно добавления товара">
-	<Grid RowDefinitions="*,*,*,*,*"
-		  ColumnDefinitions="*,*,*,*">
-		<TextBlock Grid.Column="1"  Grid.ColumnSpan="2" Text="Название продукта" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-		<TextBox Name="NameBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="20" Width="200"/>
-		<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Количество" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-		<TextBox Name="CountBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Width="200"/>
-		<TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="Цена" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-		<TextBox Name="CostBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Center" Width="200"/>
-		<Button Background="Yellow" Grid.Column="1" Grid.Row="3" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Выберете изображение" Margin="5" HorizontalContentAlignment="Center" Click="AddImage_Click" />
-		<Button Background="Yellow" Grid.Column="2" Grid.Row="3" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Назад" Margin="5" HorizontalContentAlignment="Center" Click="Back_Click"  />
-		<Button Background="Yellow" Grid.Column="1" Grid.Row="4" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Добавить товар" Margin="5" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Click="AddProduct_Click"/>
-	</Grid>
-	
-	
+        Icon="/Images/logo.ico"
+        Title="Добавление товара"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        SizeToContent="WidthAndHeight"
+        MinWidth="600"
+        MinHeight="500">
+
+    <Grid Background="#F5F5F5">
+        <Border Background="#2C3E50" 
+                Height="70" 
+                VerticalAlignment="Top">
+            <TextBlock Text="Добавление нового товара" 
+                       Foreground="White" 
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Border>
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="20,80,20,20">
+            <StackPanel Orientation="Vertical" 
+                        Spacing="20"
+                        HorizontalAlignment="Stretch">
+                
+                <Border Background="White" 
+                        CornerRadius="10" 
+                        Padding="20">
+                    <StackPanel Orientation="Vertical" Spacing="20">
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Название продукта:" 
+                                       Foreground="#555"
+                                       FontWeight="SemiBold"/>
+                            <TextBox Name="NameBox" 
+                                     Height="40" 
+                                     Padding="10"
+                                     HorizontalAlignment="Stretch"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Количество:" 
+                                       Foreground="#555"
+                                       FontWeight="SemiBold"/>
+                            <TextBox Name="CountBox" 
+                                     Height="40" 
+                                     Padding="10"
+                                     HorizontalAlignment="Stretch"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Цена:" 
+                                       Foreground="#555"
+                                       FontWeight="SemiBold"/>
+                            <TextBox Name="CostBox" 
+                                     Height="40" 
+                                     Padding="10"
+                                     HorizontalAlignment="Stretch"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+                
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            Spacing="15">
+                    <Button Width="200" 
+                            Height="45" 
+                            Content="Выберите изображение" 
+                            Background="#FFD700"
+                            Foreground="#2C3E50"
+                            FontWeight="Bold"
+                            BorderThickness="0"
+                            CornerRadius="5"
+                            Click="AddImage_Click"/>
+                            
+                    <Button Width="200" 
+                            Height="45" 
+                            Content="Назад" 
+                            Background="#FFD700"
+                            Foreground="#2C3E50"
+                            FontWeight="Bold"
+                            BorderThickness="0"
+                            CornerRadius="5"
+                            Click="Back_Click"/>
+                </StackPanel>
+                
+                <Button Width="300" 
+                        Height="50" 
+                        Content="Добавить товар" 
+                        Background="#FFD700"
+                        Foreground="#2C3E50"
+                        FontWeight="Bold"
+                        FontSize="16"
+                        BorderThickness="0"
+                        CornerRadius="5"
+                        HorizontalAlignment="Center"
+                        Click="AddProduct_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
-  

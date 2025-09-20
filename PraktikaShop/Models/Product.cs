@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PraktikaShop.Models;
 
@@ -20,7 +21,26 @@ public partial class Product
     {
         get
         {
-            return new Bitmap(this.Image);
+            try
+            {
+                if (!string.IsNullOrEmpty(Image) && File.Exists(Image))
+                {
+                    return new Bitmap(Image);
+                }
+                
+                string placeholderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shop", "picture.png");
+                
+                if (File.Exists(placeholderPath))
+                {
+                    return new Bitmap(placeholderPath);
+                }
+                
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 

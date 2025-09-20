@@ -6,6 +6,7 @@ using MsBox.Avalonia;
 using PraktikaShop.Models;
 using System;
 using System.Linq;
+using MsBox.Avalonia.Enums;
 
 namespace PraktikaShop;
 
@@ -34,10 +35,7 @@ public partial class RegistrationWindow : Window
 
             var newUser = new User
             {
-
                 /*     UserId = context.Users.OrderBy(x=>x.UserId).LastOrDefault().UserId + 1,*/
-
-
                 Fullname = NameBox.Text,
                 Phone = PhoneBox.Text,
                 RoleId = 2,
@@ -45,9 +43,6 @@ public partial class RegistrationWindow : Window
                 Birthday = new DateOnly(BirthdayBox.SelectedDate.Value.Year, BirthdayBox.SelectedDate.Value.Month, BirthdayBox.SelectedDate.Value.Day),
                 Login = LoginBox.Text,
                 Password = PasswordBox.Text
-
-
-
             };
 
 
@@ -73,30 +68,45 @@ public partial class RegistrationWindow : Window
     }
 
 
-    private  bool Validation()
+    private bool Validation()
     {
-        if (PhoneBox.Text == null || PhoneBox.Text.Length != 10)
+        if (string.IsNullOrWhiteSpace(NameBox.Text) || 
+            string.IsNullOrWhiteSpace(PhoneBox.Text) ||
+            string.IsNullOrWhiteSpace(PassportBox.Text) ||
+            string.IsNullOrWhiteSpace(LoginBox.Text) ||
+            string.IsNullOrWhiteSpace(PasswordBox.Text) ||
+            !BirthdayBox.SelectedDate.HasValue)
         {
-            var message = MessageBoxManager.GetMessageBoxStandard("Alarm", "Phone number has 10 symbols", MsBox.Avalonia.Enums.ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
-             message.ShowAsync();
-            return false;
-        }
-
-        if (PassportBox.Text == null || PassportBox.Text.Length != 10)
-        {
-            var message = MessageBoxManager.GetMessageBoxStandard("Alarm", "Passport has 10 symbols", MsBox.Avalonia.Enums.ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
-             message.ShowAsync();
-            return false;
-        }   
-
-        if(string.IsNullOrWhiteSpace(PassportBox.Text) || string.IsNullOrEmpty(NameBox.Text) || string.IsNullOrEmpty(PhoneBox.Text) || BirthdayBox.SelectedDate.HasValue != false || string.IsNullOrEmpty(LoginBox.Text) || string.IsNullOrEmpty(PasswordBox.Text))
-        {
-            var message = MessageBoxManager.GetMessageBoxStandard("Alarm", "��������� ��� ����", MsBox.Avalonia.Enums.ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+            var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Все поля должны быть заполнены",
+                ButtonEnum.Ok,  MsBox.Avalonia.Enums.Icon.Error);
             message.ShowAsync();
             return false;
         }
-       
-        return true;
+        if (PhoneBox.Text.Length != 10 || !PhoneBox.Text.All(char.IsDigit))
+        {
+            var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Номер телефона должен содержать 10 цифр",
+                ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+            message.ShowAsync();
+            return false;
+        }
+        
+        if (PassportBox.Text.Length != 10 || !PassportBox.Text.All(char.IsDigit))
+        {
+            var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Серия и номер паспорта должны содержать 10 цифр",
+                ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+            message.ShowAsync();
+            return false;
+        }
+        
+        using var context = new KarpovContext();
+        if (context.Users.Any(u => u.Login == LoginBox.Text))
+        {
+            var message = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Пользователь с таким логином уже существует",
+                ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Error);
+            message.ShowAsync();
+            return false;
+        }
 
+        return true;
     }
 }

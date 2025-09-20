@@ -7,6 +7,8 @@ using PraktikaShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace PraktikaShop;
 
@@ -50,7 +52,7 @@ public partial class OrderWindow : Window
         {
             totalPrice += (item.Product.Cost ?? 0) * item.ProductCount;
         }
-        TotalPriceText.Text = $"����� ���������: {totalPrice} ���.";
+        TotalPriceText.Text = $"Общая стоимость: {totalPrice} руб.";
     }
 
     private void BackButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -68,11 +70,17 @@ public partial class OrderWindow : Window
         {
             StartDate =DateOnly.FromDateTime(DateTime.Now),
             EndDate = new DateOnly(2026,12,12),
-            Status = "�����"
+            Status = "Новый"
         };
 
         context.Orders.Add(Neworder);
         await context.SaveChangesAsync();
+        var catalogWindow = new CatalogWindow(_currentUserId);
+        catalogWindow.Show();
+        Close(this);
+        var message = MessageBoxManager.GetMessageBoxStandard("Подтверждение заказа", "Ваш заказ оформлен",
+            ButtonEnum.Ok, MsBox.Avalonia.Enums.Icon.Success);
+        await message.ShowAsync();
 
 
         foreach (var basketItem in _basketItems)
@@ -84,8 +92,7 @@ public partial class OrderWindow : Window
             };
             context.OrderProducts.Add(orderProduct);
         }
-
-
+        
        await context.SaveChangesAsync();
 
     }

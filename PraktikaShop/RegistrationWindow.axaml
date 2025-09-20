@@ -2,36 +2,138 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
         x:Class="PraktikaShop.RegistrationWindow"
-		Icon="Images/logo.ico"
-        Title="Окно регистрации">
+        Icon="Images/logo.ico"
+        Title="Регистрация"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI">
 
-	<DockPanel>
-		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-			<TextBlock Text="Введите cвои данные"/>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5" DockPanel.Dock="Bottom">
-			<Button Content="Назад" Margin="5" Click="BackButton" Background="Yellow"/>
-			<Button Content="Зарегестрироваться" Click="RegistrationButton" Margin="5" Background="Yellow" />
-		</StackPanel>
-
-		<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<TextBlock Text="ФИО" Margin="5"/>
-			<TextBox Margin="5" Width="150" x:Name="NameBox"/>
-			<TextBlock Text="Паспорт" Margin="5"/>
-			<TextBox Margin="5" Width="150" x:Name="PassportBox"/>
-			<TextBlock Text="Номер телефона" Margin="5"/>
-			<TextBox Margin="5" Width="150" x:Name="PhoneBox"/>
-			<TextBlock Text="Дата рождения" Margin="5"/>
-			<DatePicker Margin="5" Width="250" x:Name="BirthdayBox"/>
-			<TextBlock Text="Логин" Margin="5"/>
-			<TextBox Margin="5" Width="150" x:Name="LoginBox"/>
-			<TextBlock Text="Пароль" Margin="5"/>
-			<TextBox Margin="5" Width="150" x:Name="PasswordBox"/>
-		</StackPanel>
-
-	</DockPanel>
-
+    <DockPanel Background="#F5F5F5">
+        <Border DockPanel.Dock="Top" Background="#2C3E50" Height="70">
+            <TextBlock Text="Регистрация в IvanPrime" 
+                       Foreground="White" 
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Border>
+        
+        <Border DockPanel.Dock="Bottom" Background="White" Height="80">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Spacing="20">
+                <Button Content="Назад" 
+                        Margin="5" 
+                        Click="BackButton" 
+                        Background="#FFFFD700"
+                        Foreground="#2C3E50"
+                        FontWeight="Bold"
+                        Width="150"
+                        Height="40"
+                        BorderThickness="0"
+                        CornerRadius="5"/>
+                        
+                <Button Content="Зарегистрироваться" 
+                        Click="RegistrationButton" 
+                        Margin="5" 
+                        Background="#FFFFD700"
+                        Foreground="#2C3E50"
+                        FontWeight="Bold"
+                        Width="200"
+                        Height="40"
+                        BorderThickness="0"
+                        CornerRadius="5"/>
+            </StackPanel>
+        </Border>
+        
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="20"
+                        Width="400">
+                
+                <Border Background="White" 
+                        CornerRadius="10" 
+                        Padding="20"
+                        Margin="0,0,0,20">
+                    <StackPanel Orientation="Vertical" Spacing="15">
+                        <TextBlock Text="Личные данные" 
+                                   FontSize="16" 
+                                   FontWeight="Bold"
+                                   Foreground="#2C3E50"
+                                   Margin="0,0,0,10"/>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="ФИО" Margin="0,0,0,2" Foreground="#555"/>
+                            <TextBox Padding="10" 
+                                     x:Name="NameBox"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Паспорт" Margin="0,0,0,2" Foreground="#555"/>
+                            <TextBox Padding="10" 
+                                     x:Name="PassportBox"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Номер телефона" Margin="0,0,0,2" Foreground="#555"/>
+                            <TextBox Padding="10" 
+                                     x:Name="PhoneBox"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Дата рождения" Margin="0,0,0,2" Foreground="#555"/>
+                            <DatePicker Padding="10" 
+                                        x:Name="BirthdayBox"
+                                        BorderThickness="1"
+                                        BorderBrush="#DDD"
+                                        CornerRadius="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <Border Background="White" 
+                        CornerRadius="10" 
+                        Padding="20">
+                    <StackPanel Orientation="Vertical" Spacing="15">
+                        <TextBlock Text="Учетные данные" 
+                                   FontSize="16" 
+                                   FontWeight="Bold"
+                                   Foreground="#2C3E50"
+                                   Margin="0,0,0,10"/>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Логин" Margin="0,0,0,2" Foreground="#555"/>
+                            <TextBox Padding="10" 
+                                     x:Name="LoginBox"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Пароль" Margin="0,0,0,2" Foreground="#555"/>
+                            <TextBox Padding="10" 
+                                     x:Name="PasswordBox"
+                                     BorderThickness="1"
+                                     BorderBrush="#DDD"
+                                     CornerRadius="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
